@@ -1,0 +1,49 @@
+﻿@model IEnumerable<MailsApp.Models.Domains.Mail>
+
+
+<div class="col-md-9">
+
+
+    <div class="padding"></div>
+   
+    <form method="post">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+
+                        <th scope="col">Nadawca</th>
+                        <th scope="col">Temat</th>
+                        <th scope="col">Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var mail in Model)
+                    {
+                        <tr>
+
+                            <td class="name col-4">@mail.SendTo</td>
+                            <td class="subject col-8 "><a href="@Url.Action("MailContent", "Home", new {mailId=mail.Id, mailstatusId=mail.MailStatusId })" target=" _blank">@mail.Title</a></td>
+                            <td class="time col-2">@mail.SentDate</td>
+                            <td>
+                                <input type="button" class="btn btn-outline-danger " onclick='window.location.href="@Url.Action("DeleteMail", "Home", new { mailId = mail.Id })"' value="Delete"
+                                       @{ @((mail.MailStatusId != 5) ? null : new { disabled = "disabled" })  } ; />
+                            </td>
+                        </tr>
+
+                    }
+
+
+
+                </tbody>
+            </table>
+
+
+
+        </div>
+    </form>
+   
+   
+</div>
+

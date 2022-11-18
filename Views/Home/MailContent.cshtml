@@ -1,0 +1,41 @@
+﻿@model MailsApp.Models.Domains.Mail
+
+@{
+    ViewBag.Title = "Poczta";
+
+}
+
+<h4>Zawartość - skrzynki: @Model.MailStatus.Name</h4>
+
+@using (Html.BeginForm("Action", "Post"))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                @Html.LabelFor(x => x.SendTo, new { @class = "form-check-label" })
+
+                @Html.TextBoxFor(x => x.SendTo, new { @class = "form-control mb-3" })
+                @Html.ValidationMessageFor(x => x.SendTo)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Title, new { @class = "form-check-label" })
+
+                @Html.TextBoxFor(x => x.Title, new { @class = "form-control mb-3" })
+                @Html.ValidationMessageFor(x => x.Title)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.MailBody, new { @class = "form-check-label" })
+
+                @Html.TextAreaFor(x => x.MailBody, new { @class = "form-control mb-5" })
+            </div>
+            @Html.HiddenFor(x => x.Id)
+            <div>
+                <button type="submit" name="cancel" value="Cancel" class="btn btn-outline-primary mb-3 "><i class="fa fa-cancel">  Anuluj</i></button>
+                <button type="submit" name="saveDraft" value="Save Draft" class="btn btn-outline-primary mb-3 "><i class="fa fa-save">  Zampisz zmiany</i></button>
+                <button type="submit" name="send" value="Send" class="btn btn-outline-primary mb-3 "><i class="fa fa-envelope">  Wyślij</i></button>
+            </div>
+        </div>
+    </div>
+}
+

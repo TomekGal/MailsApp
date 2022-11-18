@@ -1,0 +1,53 @@
+﻿@model MailsApp.Models.Domains.Mail
+@{
+   
+
+    ViewBag.Title = "NewMail";
+}
+
+<h2 class="text-center col-md-10 mb-6 ">Nowa wiadomość</h2>
+
+@using (Html.BeginForm("Action", "Post"))
+{
+    @Html.AntiForgeryToken()
+        <div class="row", style="max-width:100%">
+
+            <div class="col-md-10">
+
+
+                <div class="form-group ">
+                    @Html.LabelFor(x => x.SendTo, new { @class = "form-check-label" })
+
+                    @Html.TextBoxFor(x => x.SendTo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.SendTo)
+
+                </div>
+                <div class="row mb-4">
+                    <div class="form-group mb-6">
+                        @Html.LabelFor(x => x.Title, new { @class = "form-check-label" })
+
+                        @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Title)
+                    </div>
+                </div>
+
+                <div class="row ">
+                    <div class="form-group mb-2 ">
+                        @Html.LabelFor(x => x.MailBody, new { @class = "form-check-label" })
+
+                        @Html.TextAreaFor(x => x.MailBody, new { @class = "form-control", style = "height:300px" })
+                        @Html.ValidationMessageFor(x => x.MailBody)
+                    </div>
+                 </div>
+                <div class="modal-footer">
+                    <button type="submit" name="cancel" value="Cancel" class="btn btn-outline-primary mb-3 "><i class="fa fa-cancel">  Anuluj</i></button>
+                    <button type="submit" name="saveDraft" value="Save Draft" class="btn btn-outline-primary mb-3 "><i class="fa fa-save">  Zampisz zmiany</i></button>
+                    <button type="submit" name="send" value="Send" class="btn btn-outline-primary mb-3 "><i class="fa fa-envelope">  Wyślij</i></button>
+                </div>
+
+
+                </div>
+            </div>
+   
+}
+
